@@ -19,7 +19,12 @@ class Users(tag: Tag) extends Table[User](tag, "users") {
 object DBWithSlickApp extends App {
 
   val query = TableQuery[Users]
-  val db = Database.forConfig("pg-postgres")
+  val dbUrl = "jdbc:postgresql://127.0.0.1:5432/users_db"
+  val dbUser = "master"
+  val dbPassword = "pass"
+  val db = Database.forURL(dbUrl, dbUser, dbPassword)
+  // from .conf file
+  //  val db = Database.forConfig("pg-postgres")
   try {
     Await.result(db.run(DBIO.seq(
       query.result.map(println)
