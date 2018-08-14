@@ -1,12 +1,10 @@
-package com.kuzdowicz.scala.examples
+package com.kuzdowicz.scala.examples.db
 
 import java.sql.{Connection, DriverManager}
 
 import scala.collection.mutable.ListBuffer
 
-case class User(id: Long, name: String, age: Int)
-
-object DBApp extends App {
+object DBWithJdbcApp extends App {
 
   Class.forName("org.postgresql.Driver")
 
