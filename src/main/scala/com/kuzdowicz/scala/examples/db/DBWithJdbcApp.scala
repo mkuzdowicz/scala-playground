@@ -6,6 +6,9 @@ import scala.collection.mutable.ListBuffer
 
 object DBWithJdbcApp extends App {
 
+  sealed case class User(id: Long, name: String, age: Int)
+
+
   Class.forName("org.postgresql.Driver")
 
   val dbUrl = "jdbc:postgresql://127.0.0.1:5432/users_db"

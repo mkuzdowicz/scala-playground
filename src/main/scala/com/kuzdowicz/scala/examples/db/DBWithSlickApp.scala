@@ -6,17 +6,19 @@ import scala.concurrent.Await
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration.Duration
 
-class Users(tag: Tag) extends Table[User](tag, "users") {
-  def id = column[Long]("id")
-
-  def name = column[String]("name")
-
-  def age = column[Int]("age")
-
-  def * = (id, name, age) <> (User.tupled, User.unapply)
-}
-
 object DBWithSlickApp extends App {
+
+  case class User(id: Long, name: String, age: Int)
+
+  class Users(tag: Tag) extends Table[User](tag, "users") {
+    def id = column[Long]("id")
+
+    def name = column[String]("name")
+
+    def age = column[Int]("age")
+
+    def * = (id, name, age) <> (User.tupled, User.unapply)
+  }
 
   val query = TableQuery[Users]
   val dbUrl = "jdbc:postgresql://127.0.0.1:5432/users_db"
